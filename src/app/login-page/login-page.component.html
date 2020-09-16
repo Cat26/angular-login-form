@@ -1,11 +1,44 @@
-<form>
+<form [formGroup]="loginForm" (ngSubmit)="onLoginFormSubmit()">
   <div class="form-group">
-    <label for="exampleInputEmail1">Email address</label>
-    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+    <label for="loginInputEmail">Email address</label>
+    <input
+      type="email"
+      id="loginInputEmail"
+      class="form-control"
+      placeholder="Enter email"
+      formControlName="email"
+    >
+    <div *ngIf="email.invalid && (email.dirty || email.touched)"
+         class="login-field-invalid">
+
+      <div *ngIf="email.errors.required">
+        email is required.
+      </div>
+      <div *ngIf="email.errors.email">
+        wrong email format.
+      </div>
+    </div>
   </div>
   <div class="form-group">
-    <label for="exampleInputPassword1">Password</label>
-    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+    <label for="loginInputPassword">Password</label>
+    <input
+      type="password"
+      id="loginInputPassword"
+      class="form-control"
+      placeholder="Password"
+      formControlName="password"
+    >
+    <div *ngIf="password.invalid && (password.dirty || password.touched)"
+         class="login-field-invalid">
+
+      <div *ngIf="password.errors.required">
+        Password is required.
+      </div>
+      <div *ngIf="password.errors.pattern">
+        Password must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters.
+      </div>
+    </div>
   </div>
-  <button type="submit" class="btn btn-primary">Submit</button>
+  <button type="submit" class="btn btn-primary" [disabled]="!loginForm.valid" >Submit</button>
 </form>
+<app-confirmation-modal></app-confirmation-modal>
