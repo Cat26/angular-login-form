@@ -1,44 +1,50 @@
-<form [formGroup]="loginForm" (ngSubmit)="onLoginFormSubmit()">
-  <div class="form-group">
-    <label for="loginInputEmail">Email address</label>
-    <input
-      type="email"
-      id="loginInputEmail"
-      class="form-control"
-      placeholder="Enter email"
-      formControlName="email"
-    >
-    <div *ngIf="email.invalid && (email.dirty || email.touched)"
-         class="login-field-invalid">
+<div class="row">
+  <div class="col-md-4"><app-profile-page *ngIf="loggedUserEmail" [userEmail]="loggedUserEmail"></app-profile-page></div>
+  <div class="col-md-8">
+    <form [formGroup]="loginForm" (ngSubmit)="onLoginFormSubmit()">
+      <div class="form-group">
+        <label for="loginInputEmail">Email address</label>
+        <input
+          type="email"
+          id="loginInputEmail"
+          class="form-control"
+          placeholder="Enter email"
+          formControlName="email"
+        >
+        <div *ngIf="email.invalid && (email.dirty || email.touched)"
+             class="login-field-invalid">
 
-      <div *ngIf="email.errors.required">
-        email is required.
+          <div *ngIf="email.errors.required">
+            email is required.
+          </div>
+          <div *ngIf="email.errors.email">
+            wrong email format.
+          </div>
+        </div>
       </div>
-      <div *ngIf="email.errors.email">
-        wrong email format.
-      </div>
-    </div>
-  </div>
-  <div class="form-group">
-    <label for="loginInputPassword">Password</label>
-    <input
-      type="password"
-      id="loginInputPassword"
-      class="form-control"
-      placeholder="Password"
-      formControlName="password"
-    >
-    <div *ngIf="password.invalid && (password.dirty || password.touched)"
-         class="login-field-invalid">
+      <div class="form-group">
+        <label for="loginInputPassword">Password</label>
+        <input
+          type="password"
+          id="loginInputPassword"
+          class="form-control"
+          placeholder="Password"
+          formControlName="password"
+        >
+        <div *ngIf="password.invalid && (password.dirty || password.touched)"
+             class="login-field-invalid">
 
-      <div *ngIf="password.errors.required">
-        Password is required.
+          <div *ngIf="password.errors.required">
+            Password is required.
+          </div>
+          <div *ngIf="password.errors.pattern">
+            Password must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters.
+          </div>
+        </div>
       </div>
-      <div *ngIf="password.errors.pattern">
-        Password must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters.
-      </div>
-    </div>
+      <button type="submit" class="btn btn-primary" [disabled]="!loginForm.valid" >Submit</button>
+      <button type="button" class="btn btn-danger" (click)="clear()">Clear</button>
+    </form>
   </div>
-  <button type="submit" class="btn btn-primary" [disabled]="!loginForm.valid" >Submit</button>
-</form>
-<app-confirmation-modal></app-confirmation-modal>
+</div>
+<app-confirmation-modal [email]="email.value"></app-confirmation-modal>

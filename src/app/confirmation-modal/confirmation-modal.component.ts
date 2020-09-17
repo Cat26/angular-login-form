@@ -1,4 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
+import {LoginConfirmationService} from "../login-confirmation.service";
 
 @Component({
   selector: 'app-confirmation-modal',
@@ -6,10 +7,10 @@ import {Component, Input, OnInit} from '@angular/core';
   styleUrls: ['./confirmation-modal.component.css']
 })
 export class ConfirmationModalComponent implements OnInit {
+  @Input()email: string;
   isOpen = false;
-  isConfirmed = false;
 
-  constructor() { }
+  constructor(private loginConfirmationService: LoginConfirmationService) { }
 
   ngOnInit(): void {
   }
@@ -23,8 +24,7 @@ export class ConfirmationModalComponent implements OnInit {
   }
 
   confirm() {
-    this.isConfirmed = true;
-    this.closeModal();
+    this.loginConfirmationService.emitLoginConfirmedEvent(this.email);
   }
 
 }
