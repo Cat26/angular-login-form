@@ -13,7 +13,7 @@ export class LoginPageComponent implements OnInit {
   @ViewChild(ConfirmationModalComponent) private confirmationModalComponent: ConfirmationModalComponent;
   loginForm = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
-    password: new FormControl('', [Validators.required, Validators.pattern('(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[a-zA-Z0-9!@#$%^&*]{8,}')])
+    password: new FormControl('', [Validators.required, Validators.pattern(/^(?=.*[A-Z])(?=.*[!@#\$%\^&\*])(?=.*[0-9])(?=.{8,})/)])
   })
   loggedUserEmail = '';
 
