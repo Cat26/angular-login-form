@@ -13,4 +13,12 @@ describe('LoginConfirmationService', () => {
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
+
+  it('should ', done => {
+    service.loginConfirmedListener().subscribe(result => {
+      expect(result).toEqual('hello');
+      done();
+    });
+    service.emitLoginConfirmedEvent('hello');
+  });
 });
