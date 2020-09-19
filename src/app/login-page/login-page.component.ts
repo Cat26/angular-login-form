@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, ViewChild} from '@angular/core';
 import {FormGroup, FormControl, Validators} from "@angular/forms";
 import {ConfirmationModalComponent} from "../confirmation-modal/confirmation-modal.component";
 import {LoginConfirmationService} from "../login-confirmation.service";
@@ -9,8 +9,8 @@ import {LoginConfirmationService} from "../login-confirmation.service";
   styleUrls: ['./login-page.component.css'],
   providers: [LoginConfirmationService]
 })
-export class LoginPageComponent implements OnInit {
-  @ViewChild(ConfirmationModalComponent) private confirmationModalComponent: ConfirmationModalComponent;
+export class LoginPageComponent {
+  @ViewChild(ConfirmationModalComponent) confirmationModalComponent: ConfirmationModalComponent;
   loginForm = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [Validators.required, Validators.pattern(/^(?=.*[A-Z])(?=.*[!@#\$%\^&\*])(?=.*[0-9])(?=.{8,})/)])
@@ -23,9 +23,6 @@ export class LoginPageComponent implements OnInit {
         this.onLogin(email);
       },
     );
-  }
-
-  ngOnInit(): void {
   }
 
   onLoginFormSubmit() {
