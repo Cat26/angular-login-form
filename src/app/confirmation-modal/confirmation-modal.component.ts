@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {LoginConfirmationService} from "../login-confirmation.service";
 
 @Component({
@@ -6,14 +6,11 @@ import {LoginConfirmationService} from "../login-confirmation.service";
   templateUrl: './confirmation-modal.component.html',
   styleUrls: ['./confirmation-modal.component.css']
 })
-export class ConfirmationModalComponent implements OnInit {
+export class ConfirmationModalComponent {
   @Input()email: string;
   isOpen = false;
 
   constructor(private loginConfirmationService: LoginConfirmationService) { }
-
-  ngOnInit(): void {
-  }
 
   closeModal() {
     this.isOpen = false;
